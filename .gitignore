@@ -1,0 +1,7 @@
+.env
+.vscode
+.eslintrc.js
+.eslintignore
+.eslintrc.json
+/build
+/node_modules
