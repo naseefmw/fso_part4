@@ -3,5 +3,6 @@
 .eslintrc.js
 .eslintignore
 .eslintrc.json
+.prettierrc
 /build
 /node_modules
