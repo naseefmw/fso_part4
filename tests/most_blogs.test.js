@@ -75,7 +75,6 @@ describe('Most Blogs', () => {
       author: 'Robert C. Martin',
       blogs: 3,
     }
-    console.log(mostBlogs(blogs))
     expect(mostBlogs(blogs)).toEqual(result)
   })
 })
