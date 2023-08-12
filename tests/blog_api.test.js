@@ -33,12 +33,11 @@ test('a specific blog is within the returned blogs', async () => {
 
 test('a valid blog can be added ', async () => {
   const newBlog = {
-    title: 'React',
-    author: ' Chan',
+    title: 'Express',
+    author: 'Chan',
     url: 'https://react',
-    likes: 71,
+    likes: 7,
   }
-
   await api
     .post('/api/blogs')
     .send(newBlog)
@@ -49,7 +48,7 @@ test('a valid blog can be added ', async () => {
   expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
 
   const titles = blogsAtEnd.map((n) => n.title)
-  expect(titles).toContain('React')
+  expect(titles).toContain('Express')
 })
 
 test('blog without title is not added', async () => {
@@ -61,6 +60,12 @@ test('blog without title is not added', async () => {
   await api.post('/api/blogs').send(newBlog).expect(400)
   const blogsAtEnd = await helper.blogsInDb()
   expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+})
+
+test('unique identifier of a blog, id is defined', async () => {
+  const response = await api.get('/api/blogs')
+  const id = response.body[0].id
+  expect(id).toBeDefined()
 })
 
 afterAll(async () => {
