@@ -62,6 +62,17 @@ test('blog without title is not added', async () => {
   expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
 })
 
+test('blog without url is not added', async () => {
+  const newBlog = {
+    title: 'Bless',
+    author: 'Chan',
+    likes: 71,
+  }
+  await api.post('/api/blogs').send(newBlog).expect(400)
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+})
+
 test('unique identifier of a blog, id is defined', async () => {
   const response = await api.get('/api/blogs')
   const id = response.body[0].id
