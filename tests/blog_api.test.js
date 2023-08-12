@@ -68,6 +68,23 @@ test('unique identifier of a blog, id is defined', async () => {
   expect(id).toBeDefined()
 })
 
+test('if likes is missing in the request it will default to zero', async () => {
+  const newBlog = {
+    title: 'How to go to Wonderland',
+    author: 'Alice',
+    url: 'https://rabbithole.com',
+  }
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const response = await api.get('/api/blogs')
+  const like = response.body.at(-1).likes
+  expect(like).toEqual(0)
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
